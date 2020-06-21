@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "module": "esnext",
+    "jsx": "react",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/components/*"]
+    }
+  }
+}

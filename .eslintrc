@@ -1,0 +1,29 @@
+{
+  "extends": ["airbnb"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "rules": {
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "react/state-in-constructor": "off",
+    "object-curly-newline": "off",
+    "implicit-arrow-linebreak": "off",
+    "import/no-unresolved": "off",
+    "no-return-assign": "off",
+    "no-unused-expressions": "off",
+    "react/destructuring-assignment": "off",
+    "import/prefer-default-export": "off",
+    "comma-dangle": "off",
+    "react/static-property-placement": "off"
+  },
+  "globals": {
+    "process.env.NODE_ENV": true
+  }
+}
