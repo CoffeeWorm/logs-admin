@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
+import { Link, generatePath } from 'react-router-dom';
 import cls from 'classnames';
 import moment from 'moment';
-import { List } from 'antd';
+import { List, Empty } from 'antd';
 import { getArticleList } from '@/service';
 import style from './style.less';
 
@@ -16,14 +17,16 @@ class ArticleList extends PureComponent {
   };
 
   componentDidMount() {
-    // this.getList();
+    this.getList();
   }
 
   async getList() {
     const { current, pageSize } = this.state;
     const {
-      data,
-      pagination: { total },
+      data: {
+        rows: data,
+        pagination: { total },
+      },
     } = await getArticleList({ params: { page: current, pageSize } });
     this.setState({ total, list: data });
   }
@@ -34,6 +37,9 @@ class ArticleList extends PureComponent {
   render() {
     const { list, current, pageSize, total } = this.state;
     const { className } = this.props;
+    if (!total) {
+      return <Empty />;
+    }
     return (
       <List
         className={cls(style.articleList, className)}
@@ -47,13 +53,16 @@ class ArticleList extends PureComponent {
           onChange: this.handlePageChange,
         }}
       >
-        {list.map(({ id, title, content, updatedAt }) => (
+        {list.map(({ id, title, intro, updatedAt }) => (
           <ListItem key={id}>
-            <Meta
-              title={title}
-              description={moment(updatedAt).format('YYYY/MM/DD')}
-            />
-            {content}
+            <Link to={generatePath('/article/:id', { id })}>
+              <Meta
+                title={title}
+                description={`修改于: ${moment(updatedAt).format('YYYY/MM/DD')}`}
+              />
+            </Link>
+
+            {intro}
           </ListItem>
         ))}
       </List>

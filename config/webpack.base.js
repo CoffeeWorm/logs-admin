@@ -23,7 +23,11 @@ module.exports = {
   target: 'web',
   module: {
     rules: [
-      { test: /\.jsx?$/, use: [{ loader: 'babel-loader' }] },
+      {
+        test: /\.jsx?$/,
+        exclude: [getAbsPath('../node_modules/')],
+        use: [{ loader: 'babel-loader' }],
+      },
       {
         test: /\.(le|c)ss$/,
         include: [getAbsPath('../src/pages')],
@@ -50,7 +54,7 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: { filename: '[name].[ext]' },
           },
-          { loader: 'css-loader'},
+          { loader: 'css-loader' },
           {
             loader: 'less-loader',
             options: {

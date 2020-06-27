@@ -1,9 +1,11 @@
 import React from 'react';
+import BasicLayout from '@/layouts/BasicLayout';
 import ArticleList from './components/ArticleList';
-import style from './style.less';
+import NewArticleJumper from './components/NewArticleJumper';
 
 export default () => (
-  <div className={style.listpage}>
+  <BasicLayout>
     <ArticleList />
-  </div>
+    <NewArticleJumper />
+  </BasicLayout>
 );

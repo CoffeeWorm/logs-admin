@@ -22,9 +22,13 @@ class Article extends Component {
   }
 
   handleSubmit = async (cb) => {
-    const result = await this.formRef.validateFields();
-    this.props.onSubmit(result);
-    cb && cb(result);
+    try {
+      const result = await this.formRef.validateFields();
+      await this.props.onSubmit(result);
+      cb && cb(result);
+    } catch (e) {
+      /* placeholder */
+    }
   };
 
   jump2Listpage = () => this.props.history.push('/');
@@ -34,10 +38,25 @@ class Article extends Component {
     return (
       <div className={cls('m-article', className)}>
         <Form ref={(node) => (this.formRef = node)} layout="vertical">
-          <Item label="标题" name="title">
+          <Item
+            label="标题"
+            name="title"
+            rules={[{ required: true, message: '请填写标题' }]}
+          >
             <Input />
           </Item>
-          <Item name="content" label="内容">
+          <Item
+            label="简介"
+            name="intro"
+            rules={[{ required: true, message: '请填写简介' }]}
+          >
+            <Input />
+          </Item>
+          <Item
+            name="content"
+            label="内容"
+            rules={[{ required: true, message: '请填写内容' }]}
+          >
             <Markdown />
           </Item>
           <div className="operator">

@@ -22,5 +22,6 @@ const devConfig = {
   },
   plugins: [new DefinePlugin(runtimeVar.development)],
   devServer,
+  stats: 'minimal',
 };
 module.exports = smart(devConfig, baseConfig);

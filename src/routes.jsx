@@ -8,16 +8,16 @@ export default [
     component: lazy(() => import(/* webpackChunkName: "index_page" */ './pages/index/index')),
   },
   {
-    path: '/artcle',
+    path: '/article',
     exact: true,
-    component: lazy(() => import(/* webpackChunkName: "artcle_new_page" */ './pages/artcle-new')),
+    component: lazy(() => import(/* webpackChunkName: "article_new_page" */ './pages/article-new')),
   },
   {
-    path: '/artcle/:id',
+    path: '/article/:id',
     exact: true,
-    component: lazy(() => import(/* webpackChunkName: "artcle_edit_page" */ './pages/artcle-edit')),
+    component: lazy(() => import(/* webpackChunkName: "article_edit_page" */ './pages/article-edit')),
   },
   { path: '/', exact: true, render: () => <Redirect from="/" to="/index" /> },
   { path: '/404', component: () => <div>404</div> },
-  // { path: '*', render: () => <Redirect to="/404" /> },
+  { path: '*', render: () => <Redirect to="/404" /> },
 ];

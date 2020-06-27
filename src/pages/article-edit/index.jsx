@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { getArticle, postArticle } from '@/service';
-import Article from '@/modules/Artcle';
-import style from './style.less';
+import { getArticle, patchArticle } from '@/service';
+import BasicLayout from '@/layouts/BasicLayout';
+import Article from '@/modules/Article';
 
 class ArticleEdit extends Component {
-  state = { title: '', content: '' };
+  state = { title: '', content: '', intro: '' };
 
   componentDidMount() {
     this.fetchArtile();
@@ -25,13 +25,13 @@ class ArticleEdit extends Component {
     }
   }
 
-  handleSubmit = async (data) => {
+  handleSubmit = (data) => {
     const {
       match: {
         params: { id },
       },
     } = this.props;
-    await postArticle({ data, match: { id } });
+    return patchArticle({ data, match: { id } });
   };
 
   jump2Listpage = () => this.props.history.push('/');
@@ -48,9 +48,9 @@ class ArticleEdit extends Component {
 
   render() {
     return (
-      <div className={style.article}>
+      <BasicLayout>
         <Article initValue={{ ...this.state }} onSubmit={this.handleSubmit} />
-      </div>
+      </BasicLayout>
     );
   }
 }
